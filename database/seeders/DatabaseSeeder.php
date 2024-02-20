@@ -33,8 +33,7 @@ class DatabaseSeeder extends Seeder
             'phone' => "+34 674987708",
             'address' => "Bareclona, España",
             'birthdate' => "1991-07-30",
-            'bio' => 'Soy Desarrollador de Software desde hace mas de 5 años. Me encanta la tecnología y todo el mundo que la rodea.<br>
-            Además de mi vocación como desarrollador, tambien me encanta la creación de contenido, por lo que tengo un canal de Youtube llamado: El Rincón de Isma.'
+            'bio' => 'Soy Desarrollador de Software desde hace mas de 5 años. Me encanta la tecnología y todo el mundo que la rodea.<br>'
         ]);
 
         $this->call([
