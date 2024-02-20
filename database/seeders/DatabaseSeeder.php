@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\Models\User::create([
-            'name' => 'Usuario de ejemplo',
+            'name' => 'Newal Medina',
             'email' => 'ing.newal.medina@gmail.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -30,10 +30,10 @@ class DatabaseSeeder extends Seeder
             'twitter_url' => "#",
             'dribbble_url' => "#",
             'linkedin_url' => "#",
-            'phone' => "+34 652 36 25 36",
-            'address' => "Madrid España",
-            'birthdate' => "1987-09-24",
-            'bio' => 'Soy Desarrollador de Software desde hace mas de 15 años. Me encanta la tecnología y todo el mundo que la rodea.<br>
+            'phone' => "+34 674987708",
+            'address' => "Bareclona, España",
+            'birthdate' => "1991-07-30",
+            'bio' => 'Soy Desarrollador de Software desde hace mas de 5 años. Me encanta la tecnología y todo el mundo que la rodea.<br>
             Además de mi vocación como desarrollador, tambien me encanta la creación de contenido, por lo que tengo un canal de Youtube llamado: El Rincón de Isma.'
         ]);
 
