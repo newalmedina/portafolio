@@ -66,8 +66,8 @@
         <footer class="overflow-hidden rounded-b-2xl" style="background: transparent">
             <p class="text-center py-6 text-gray-lite dark:text-color-910"> © 2023 Todos los derechos reservados
                 by <a class="hover:text-[#FA5252] duration-300 transition"
-                    href="me.elrincondeisma.com" target="_blank"
-                    rel="noopener noreferrer"> El Rincón de Isma</a>. </p>
+                    href="http://newalhome.ddns.net:8083/" target="_blank"
+                    rel="noopener noreferrer"> Newal Medina</a>. </p>
         </footer>
         <!-- footer section end -->
     </div>

@@ -68,35 +68,68 @@
             <ul
                 class="block rounded-b-[20px] shadow-md absolute left-0 top-20 z-[22222222222222] w-full bg-white dark:bg-[#1d1d1d]">
                 <li>
-                    <a class="mobile-menu-items-active" href="./aboutOne.html">
+                    <a @if(Route::is('home')) class="mobile-menu-items-active" @else class="mobile-menu-items" @endif href="{{ route('home') }}"
+                    >
                         <span class="mr-2 text-xl">
                             <i class="fa-regular fa-user"></i>
                         </span>Sobre mi </a>
                 </li>
                 <li>
-                    <a class="mobile-menu-items" href="./resumeOne.html">
+                    <a @if(Route::is('resume')) class="mobile-menu-items-active" @else class="mobile-menu-items" @endif href="{{ route('resume') }}"
+                    >
                         <span class="mr-2 text-xl">
                             <i class="fa-regular fa-file-lines"></i>
                         </span>Resumen </a>
                 </li>
                 <li>
-                    <a class="mobile-menu-items" href="./portfiloOne.html">
+                    <a @if(Route::is('jobs')) class="mobile-menu-items-active" @else class="mobile-menu-items" @endif href="{{ route('jobs') }}"
+                    >
                         <span class="mr-2 text-xl">
                             <i class="fas fa-briefcase"></i>
                         </span>Trabajos </a>
                 </li>
                 <li>
-                    <a class="mobile-menu-items" href="./blogOne.html">
+                    <a @if(Route::is('blog')) class="mobile-menu-items-active" @else class="mobile-menu-items" @endif href="{{ route('blog') }}"
+                    >
                         <span class="mr-2 text-xl">
                             <i class="fa-brands fa-blogger"></i>
                         </span>Blogs </a>
                 </li>
                 <li>
-                    <a class="mobile-menu-items" href="./contactOne.html">
+                    <a @if(Route::is('contact')) class="mobile-menu-items-active" @else class="mobile-menu-items" @endif href="{{ route('contact') }}">
                         <span class="mr-2 text-xl">
                             <i class="fa-solid fa-address-book"></i>
                         </span> Contacto </a>
                 </li>
+                @auth
+                <li>
+                    <a class="mobile-menu-items" href="{{ url('/admin') }}">
+                        <span class="mr-2 text-xl">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </span> Administración </a>
+                </li>
+                <li>
+                    <form method="POST" action="{{route('logout')}}">
+                        @csrf
+            
+                        <button type="submit" class="mobile-menu-items" >
+                            <span class="mr-2 text-xl">
+                                <i class="fa-solid fa-power-off"></i>
+                            </span>Log Out
+                        </button>
+                      </form>
+                   
+                </li>
+                
+                @endauth
+                @guest
+                <li>
+                    <a class="mobile-menu-items" href="{{route('login')}}">
+                        <span class="mr-2 text-xl">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                        </span> Login </a>
+                </li>
+                @endguest
             </ul>
         </nav>
         <!-- mobile menu end -->
@@ -191,7 +224,7 @@
             <div class="col-span-12 lg:col-span-8">
                 <!-- header for mobile devices start -->
                 <header
-                    class="lg:w-[560px] h-[144px] hidden lg:block p-[30px] ml-auto mb-10 rounded-[16px] bg-white dark:bg-[#111111]">
+                    class="lg:w-[565px] h-[144px] hidden lg:block p-[30px] ml-auto mb-10 rounded-[16px] bg-white dark:bg-[#111111]">
                     <nav class="hidden lg:block">
                         <ul class="flex">
                             <li> <a @if(Route::is('home')) class="menu-active" @else class="menu-item" @endif href="/">
@@ -214,6 +247,35 @@
                                     <span class="text-xl mb-1">
                                         <i class="fa-solid fa-address-book"></i>
                                     </span> Contacto </a></li>
+
+                            @auth
+                            <li>
+                                <a class="menu-item" href="{{ url('/admin') }}">
+                                    <span class="mr-2 text-xl">
+                                        <i class="fa-solid fa-user-tie"></i>
+                                    </span> Admin </a>
+                            </li>
+                            <li>
+                                <form method="POST" action="{{route('logout')}}">
+                                    @csrf
+                        
+                                    <button type="submit" class="menu-item" >
+                                        <span class="mr-2 text-xl">
+                                            <i class="fa-solid fa-power-off"></i>
+                                        </span>Log Out
+                                    </button>
+                                  </form>
+                                
+                            </li>
+                            @endauth
+                            @guest
+                            <li>
+                                <a class="menu-item" href="{{route('login')}}">
+                                    <span class="mr-2 text-xl">
+                                        <i class="fa-solid fa-right-to-bracket"></i>
+                                    </span> login </a>
+                            </li>
+                            @endguest
                         </ul>
                     </nav>
                 </header>

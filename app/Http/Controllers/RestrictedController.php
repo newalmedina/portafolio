@@ -16,14 +16,16 @@ use Illuminate\Http\Request;
 class RestrictedController extends Controller
 {
     //
-    public function index(){
+    public function index()
+    {
         return view('admin.dashboard');
     }
-    public function aboutme(){
+    public function aboutme()
+    {
         return view('admin.aboutme');
-
     }
-    public function aboutmeSave(Request $request){
+    public function aboutmeSave(Request $request)
+    {
 
         $user = User::find(1);
         $user->facebook_url = $request->facebook_url;
@@ -36,78 +38,80 @@ class RestrictedController extends Controller
         $user->birthdate = $request->birthdate;
 
         $user->bio = $request->bio;
-        if($request->file()){
-            $fileName = time().'_'.$request->cv_url->getClientOriginalName();
-            $filepath = $request->file('cv_url')->storeAs('uploads',$fileName,'public');
-            $user->url_cv='/storage/'.$filepath;
+        if ($request->file()) {
+            $fileName = time() . '_' . $request->cv_url->getClientOriginalName();
+            $filepath = $request->file('cv_url')->storeAs('uploads', $fileName, 'public');
+            $user->url_cv = '/storage/' . $filepath;
         }
         $user->save();
         return redirect()->back();
-
-
     }
-    public function services(){
+    public function services()
+    {
         $services = Service::all();
-        return view('admin.services',['services' => $services]);
-
+        return view('admin.services', ['services' => $services]);
     }
-    public function servicesCreate(){
+    public function servicesCreate()
+    {
         return view('admin.newService');
-
     }
-    public function serviceSave(Request $request){
+    public function serviceSave(Request $request)
+    {
         $service = new Service;
-        $service->title=$request->title;
-        $service->description=$request->description;
-        $service->color_hex=$request->color_hex;
-        if($request->file()){
-            $fileName = time().'_'.$request->logo_url->getClientOriginalName();
-            $filepath = $request->file('logo_url')->storeAs('uploads',$fileName,'public');
-            $service->logo_url='/storage/'.$filepath;
+        $service->title = $request->title;
+        $service->description = $request->description;
+        $service->color_hex = $request->color_hex;
+        if ($request->file()) {
+            $fileName = time() . '_' . $request->logo_url->getClientOriginalName();
+            $filepath = $request->file('logo_url')->storeAs('uploads', $fileName, 'public');
+            $service->logo_url = '/storage/' . $filepath;
         }
         $service->save();
         return redirect('/admin/services');
     }
-    public function servicesEdit(Service $service){
+    public function servicesEdit(Service $service)
+    {
 
         return view('admin.editService', ['service' => $service]);
-        
     }
-    public function serviceUpdate(Request $request){
+    public function serviceUpdate(Request $request)
+    {
         $service = Service::find($request->service_id);
-        $service->title=$request->title;
-        $service->description=$request->description;
-        $service->color_hex=$request->color_hex;
-        if($request->file()){
-            $fileName = time().'_'.$request->logo_url->getClientOriginalName();
-            $filepath = $request->file('logo_url')->storeAs('uploads',$fileName,'public');
-            $service->logo_url='/storage/'.$filepath;
+        $service->title = $request->title;
+        $service->description = $request->description;
+        $service->color_hex = $request->color_hex;
+        if ($request->file()) {
+            $fileName = time() . '_' . $request->logo_url->getClientOriginalName();
+            $filepath = $request->file('logo_url')->storeAs('uploads', $fileName, 'public');
+            $service->logo_url = '/storage/' . $filepath;
         }
         $service->save();
         return redirect('/admin/services');
-
     }
-    public function servicesDelete(Service $service){
+    public function servicesDelete(Service $service)
+    {
         $service->delete();
         return redirect('/admin/services');
-
     }
 
 
-    public function resume(){
-        $educations= Education::all();
+    public function resume()
+    {
+        $educations = Education::all();
         $jobs = Job::all();
         $workingSkills = WorkingSkill::all();
         $knows = Knowledge::all();
-        return view('admin.resume.index',['educations' => $educations,
-                                    'experiences' => Experience::all(),
-                                    'jobs'=>$jobs,
-                                    'workingSkills'=>$workingSkills,
-                                    'knows'=>$knows]);
-
+        return view('admin.resume.index', [
+            'educations' => $educations,
+            'experiences' => Experience::all(),
+            'jobs' => $jobs,
+            'workingSkills' => $workingSkills,
+            'knows' => $knows
+        ]);
     }
-    public function resumeSave(Request $request){
-        
+    public function resumeSave(Request $request)
+    {
+
         Education::truncate();
         Experience::truncate();
         WorkingSkill::truncate();
@@ -180,35 +184,36 @@ class RestrictedController extends Controller
 
         $data = json_decode($request->tags);
 
-        foreach($data as $tag){
-           $tagNew = new Knowledge;
-           $tagNew->title = $tag->value;
-           $tagNew->save();
+        foreach ($data as $tag) {
+            $tagNew = new Knowledge;
+            $tagNew->title = $tag->value;
+            $tagNew->save();
         }
 
         return redirect()->back()->withInput();
     }
-    public function jobs(){
-        
-        return view('admin.jobs.index', ['jobs' => Job::all()]);
-        
-    }
-    public function jobsCreate(){
-        $categories = array('Video','Web Design','Logo','Graphic Design');
-        return view('admin.jobs.create',['categories' => $categories]);
+    public function jobs()
+    {
 
+        return view('admin.jobs.index', ['jobs' => Job::all()]);
     }
-    public function jobsSave(Request $request){
+    public function jobsCreate()
+    {
+        $categories = array('Video', 'Web Design', 'Logo', 'Graphic Design', 'Programación', 'Otros');
+        return view('admin.jobs.create', ['categories' => $categories]);
+    }
+    public function jobsSave(Request $request)
+    {
         $job = new Job;
         $job->category = $request->category;
         $job->title = $request->title;
         $job->subcategory = $request->subcategory;
-        if($request->file()){
-            $fileName = time().'_'.$request->logo_url->getClientOriginalName();
-            $filepath = $request->file('logo_url')->storeAs('uploads',$fileName,'public');
-            $job->logo_url='/storage/'.$filepath;
+        if ($request->file()) {
+            $fileName = time() . '_' . $request->logo_url->getClientOriginalName();
+            $filepath = $request->file('logo_url')->storeAs('uploads', $fileName, 'public');
+            $job->logo_url = '/storage/' . $filepath;
         }
-       
+
         $job->color_hex = $request->color_hex;
         $job->project_name = $request->project_name;
         $job->languages = $request->languages;
@@ -218,25 +223,25 @@ class RestrictedController extends Controller
         $job->save();
 
         return redirect('/admin/jobs');
-
     }
-    public function jobsEdit(Job $job) {
-        $categories = array('Video','Web Design','Logo','Graphic Design');
+    public function jobsEdit(Job $job)
+    {
+        $categories = array('Video', 'Web Design', 'Logo', 'Graphic Design');
 
-        return view('admin.jobs.edit',['categories' => $categories,'job'=>$job]);
-
+        return view('admin.jobs.edit', ['categories' => $categories, 'job' => $job]);
     }
-    public function jobsUpdate(Request $request){
+    public function jobsUpdate(Request $request)
+    {
         $job = Job::find($request->job_id);
         $job->category = $request->category;
         $job->title = $request->title;
         $job->subcategory = $request->subcategory;
-        if($request->file()){
-            $fileName = time().'_'.$request->logo_url->getClientOriginalName();
-            $filepath = $request->file('logo_url')->storeAs('uploads',$fileName,'public');
-            $job->logo_url='/storage/'.$filepath;
+        if ($request->file()) {
+            $fileName = time() . '_' . $request->logo_url->getClientOriginalName();
+            $filepath = $request->file('logo_url')->storeAs('uploads', $fileName, 'public');
+            $job->logo_url = '/storage/' . $filepath;
         }
-       
+
         $job->color_hex = $request->color_hex;
         $job->project_name = $request->project_name;
         $job->languages = $request->languages;
@@ -247,73 +252,74 @@ class RestrictedController extends Controller
 
         return redirect()->back()->withInput();
     }
-    public function jobsDelete(Job $job){
+    public function jobsDelete(Job $job)
+    {
         $job->delete();
         return redirect()->back();
-
     }
 
 
-    public function blogs(){
+    public function blogs()
+    {
         return view('admin.blogs.index', ['blogs' => Blog::all()]);
-        
     }
-    public function blogsCreate(){
-        
-        return view('admin.blogs.create');
+    public function blogsCreate()
+    {
 
+        return view('admin.blogs.create');
     }
-    public function blogsSave(Request $request){
+    public function blogsSave(Request $request)
+    {
         $blog = new Blog;
         $blog->title = $request->title;
         $blog->subcategory = $request->subcategory;
-        if($request->file()){
-            $fileName = time().'_'.$request->logo_url->getClientOriginalName();
-            $filepath = $request->file('logo_url')->storeAs('uploads',$fileName,'public');
-            $blog->logo_url='/storage/'.$filepath;
+        if ($request->file()) {
+            $fileName = time() . '_' . $request->logo_url->getClientOriginalName();
+            $filepath = $request->file('logo_url')->storeAs('uploads', $fileName, 'public');
+            $blog->logo_url = '/storage/' . $filepath;
         }
-       
+
         $blog->color_hex = $request->color_hex;
         $blog->body = $request->body;
         $blog->save();
 
         return redirect('/admin/blogs');
-
     }
-    public function blogsEdit(Blog $blog) {
+    public function blogsEdit(Blog $blog)
+    {
 
-        return view('admin.blogs.edit',['blog'=>$blog]);
-
+        return view('admin.blogs.edit', ['blog' => $blog]);
     }
-    public function blogsUpdate(Request $request){
+    public function blogsUpdate(Request $request)
+    {
         $blog = Blog::find($request->blog_id);
         $blog->title = $request->title;
         $blog->subcategory = $request->subcategory;
-        if($request->file()){
-            $fileName = time().'_'.$request->logo_url->getClientOriginalName();
-            $filepath = $request->file('logo_url')->storeAs('uploads',$fileName,'public');
-            $blog->logo_url='/storage/'.$filepath;
+        if ($request->file()) {
+            $fileName = time() . '_' . $request->logo_url->getClientOriginalName();
+            $filepath = $request->file('logo_url')->storeAs('uploads', $fileName, 'public');
+            $blog->logo_url = '/storage/' . $filepath;
         }
-       
+
         $blog->color_hex = $request->color_hex;
         $blog->body = $request->body;
         $blog->save();
 
         return redirect()->back()->withInput();
     }
-    public function blogsDelete(Job $job){
+    public function blogsDelete(Job $job)
+    {
         $job->delete();
         return redirect()->back();
-
     }
 
-    public function msgs(){
-        return view('admin.msgs.index',['msgs'=>Message::all()]);
-
+    public function msgs()
+    {
+        return view('admin.msgs.index', ['msgs' => Message::all()]);
     }
-    public function msgsDelete(Message $message){
+    public function msgsDelete(Message $message)
+    {
         $message->delete();
         return redirect()->back();
-
     }
 }

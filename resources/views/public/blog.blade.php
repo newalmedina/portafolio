@@ -13,7 +13,7 @@
                             <div class="overflow-hidden rounded-lg">
                                 <a href="#ex1" rel="modal:open">
                                     <img class="rounded-lg w-full cursor-pointer transition duration-200 ease-in-out transform hover:scale-110"
-                                        src="{{ $item->logo_url }}" alt="blog image" />
+                                        src="{{ $item->logo_url }}" alt="blog image" />sadsadsa
                                 </a>
                             </div>
                             <div class="flex mt-4 text-tiny text-gray-lite dark:text-[#A6A6A6]">
@@ -65,8 +65,8 @@
         <footer class="overflow-hidden rounded-b-2xl" style="background: transparent">
             <p class="text-center py-6 text-gray-lite dark:text-color-910"> © 2023 Todos los derechos reservados
                 by <a class="hover:text-[#FA5252] duration-300 transition"
-                    href="me.elrincondeisma.com" target="_blank"
-                    rel="noopener noreferrer"> El Rincón de Isma</a>. </p>
+                    href="http://newalhome.ddns.net:8083/" target="_blank"
+                    rel="noopener noreferrer"> Newal Medina</a>. </p>
         </footer>
         <!-- footer section end -->
     </section>
