@@ -11,6 +11,7 @@ use App\Models\Message;
 use App\Models\Service;
 use App\Models\User;
 use App\Models\WorkingSkill;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 
 class RestrictedController extends Controller
@@ -199,7 +200,7 @@ class RestrictedController extends Controller
     }
     public function jobsCreate()
     {
-        $categories = array('Video', 'Web Design', 'Logo', 'Graphic Design', 'Programación', 'Otros');
+        $categories = CategoryService::getCategoryOptions();
         return view('admin.jobs.create', ['categories' => $categories]);
     }
     public function jobsSave(Request $request)
@@ -226,7 +227,7 @@ class RestrictedController extends Controller
     }
     public function jobsEdit(Job $job)
     {
-        $categories = array('Video', 'Web Design', 'Logo', 'Graphic Design');
+        $categories = CategoryService::getCategoryOptions();
 
         return view('admin.jobs.edit', ['categories' => $categories, 'job' => $job]);
     }

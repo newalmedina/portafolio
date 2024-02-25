@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\CategoryService;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->enum('category', ['Video', 'Web Design','Logo', 'Graphic Design']);
+            $table->string('category');
             $table->string('title');
             $table->string('subcategory')->nullable();
             $table->string('logo_url')->nullable();

@@ -11,10 +11,15 @@
                 <ul
                     class="button-group isotop-menu-wrapper mt-[30px] flex w-full justify-start md:justify-end flex-wrap font-medium">
                     <li class="fillter-btn mr-4 md:mx-4 is-checked" data-filter="*">All</li>
-                    <li class="fillter-btn mr-4 md:mx-4" data-filter=".Video">Video</li>
-                    <li class="fillter-btn mr-4 md:mx-4" data-filter=".Web Design"> Web Design</li>
-                    <li class="fillter-btn mr-4 md:mx-4" data-filter=".Logo"> Logo</li>
-                    <li class="fillter-btn mr-4 md:mx-4" data-filter=".Graphic Design">Graphic Design</li>
+                    @php
+                    $categoryOptions = \App\Services\CategoryService::getCategoryOptions();
+                    @endphp
+                
+                    @foreach ($categoryOptions as $category)
+                        <li class="fillter-btn mr-4 md:mx-4" data-filter=".{{ $category }}">{{ $category }}</li>
+                        <li></li>
+                    @endforeach
+                    
                 </ul>
             </div>
             <!-- End py-12 -->
